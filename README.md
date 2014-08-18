@@ -2,6 +2,13 @@
 
 A pomodoro counter implementation for [Todo.txt](http://todotxt.com/).
 
+## Installation
+
+* Make sure you have ruby installed
+* run `gem install rainbow`
+* Download this repo somewhere on your filesystem
+* symlink the `pom` executable into your TODO_ACTIONS_DIR
+
 ## Usage:
 
 	todo.sh pomo action [task_number] [args]
