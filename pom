@@ -1,0 +1,75 @@
+#!/usr/bin/env ruby
+
+require 'date'
+require 'rainbow'
+require_relative 'lib/task'
+require_relative 'lib/countdown'
+
+POMODORO_SECONDS = 25 * 60
+
+def read_todos
+  todos = File.read(ENV['TODO_FILE'])
+  todos.split($/)
+end
+
+def increase_pomos todos, index
+  todo_to_update = todos[index]
+  task = Task.new(index + 1, todo_to_update)
+  task.add_pomo
+  task.puts_highlighted
+  `todo.sh replace #{index + 1} "#{task.to_s}"`
+end
+
+def plan_task todos, index, planned
+  todo_to_update = todos[index]
+  task = Task.new(index + 1, todo_to_update)
+  task.plan(planned)
+  task.puts_highlighted
+  `todo.sh replace #{index + 1} "#{task.to_s}"`
+end
+
+def puts_and_exit string
+  puts string 
+  exit
+end
+
+
+case ARGV[1]
+when 'ls'
+  todos = read_todos
+  todos.each_with_index do |todo, index|
+    Task.new(index + 1, todo).puts_highlighted
+  end
+when 'add'
+  puts_and_exit "You must insert the task number" unless index = ARGV[2]
+  puts_and_exit "Task number must be... a number" unless index =~ /\d+/
+  index = index.to_i - 1
+  todos = read_todos
+  increase_pomos todos, index
+when 'plan'
+  puts_and_exit "You must insert the task number" unless index = ARGV[2]
+  puts_and_exit "Task number must be... a number" unless index =~ /\d+/
+  puts_and_exit "You must insert the task pomodori estimate" unless planned = ARGV[3]
+  puts_and_exit "The task pomodori estimate must be a number" unless planned =~ /\d+/
+  index = index.to_i - 1
+  todos = read_todos
+  plan_task todos, index, planned
+when 'start'
+  puts_and_exit "You must insert the task number" unless index = ARGV[2]
+  puts_and_exit "Task number must be... a number" unless index =~ /\d+/
+  index = index.to_i - 1
+  todos = read_todos
+  Countdown.new.run(POMODORO_SECONDS)
+  increase_pomos todos, index
+when 'help'
+  puts "Usage: todo.sh pomo action [task_number] [args]\n"
+  puts "Actions:"
+  puts "  ls"
+  puts "     lists tasks with pomodori count and estimates"
+  puts "  start ITEM#"
+  puts "     start a pomodoro timer for item ITEM#"
+  puts "  add ITEM#"
+  puts "     add one pomodoro to task on line ITEM# without running a timer"
+  puts "  plan ITEM# PLANNED_POMODORI"
+  puts "     estimate ITEM# will take PLANNED_POMODORI to complete"
+end
