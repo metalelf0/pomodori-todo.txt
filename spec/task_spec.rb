@@ -21,6 +21,18 @@ describe Task do
   end
 
   context "Task#add_pomo" do
+    context "Prioritized task" do
+      subject { Task.new(1, "(A) Write Task spec (#pomo: 3/5)")}
+      specify { expect(subject.pomodori).to eq(3) }
+
+      context "Adding pomo to a tagged task" do
+        before { subject.add_pomo }
+        specify { expect(subject.pomodori).to eq(4) }
+        specify { expect(subject.to_s).to eq("Write Task spec (#pomo: 4/5)") }
+        specify { subject.add_pomo; expect(subject.to_s).to eq("Write Task spec (#pomo: 5/5)") }
+      end
+    end
+
     context "Already tagged task" do
       subject { Task.new(1, "Write Task spec (#pomo: 3/5)")}
       specify { expect(subject.pomodori).to eq(3) }

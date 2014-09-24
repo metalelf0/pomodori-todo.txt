@@ -8,6 +8,7 @@ class Task
   attr_accessor :planned
 
   POMO_REGEXP = / \(#pomo: (\d+)\/(\d+)\)$/
+  PRIORITY_REGEXP = /^\([A-Z]+\) /
   STATUS_COLORS = {
     new: :white,
     planned: :green,
@@ -23,7 +24,7 @@ class Task
     else
       @pomodori, @planned = 0, 0
     end
-    @text = text.gsub(POMO_REGEXP, '')
+    @text = text.gsub(POMO_REGEXP, '').gsub(PRIORITY_REGEXP, '')
   end
 
   def to_s
