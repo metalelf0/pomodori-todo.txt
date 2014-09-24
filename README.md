@@ -18,18 +18,19 @@ A pomodoro counter implementation for [Todo.txt](http://todotxt.com/).
 
 ## Usage:
 
-	todo.sh pomo action [task_number] [args]
-	Actions:
-	  ls
-	     lists tasks with pomodori count and estimates
-    log
-       displays a log of your pomodori
-	  start ITEM#
-	     start a pomodoro timer for item ITEM#
-	  add ITEM#
-	     add one pomodoro to task on line ITEM# without running a timer
-	  plan ITEM# PLANNED_POMODORI
-	     estimate ITEM# will take PLANNED_POMODORI to complete
+    todo.sh pomo action [task_number] [args]
+    Actions:
+      ls
+        lists tasks with pomodori count and estimates
+      log
+        displays a log of your pomodori
+      start ITEM#
+         start a pomodoro timer for item ITEM#
+      add ITEM#
+         add one pomodoro to task on line ITEM# without running a timer
+      plan ITEM# PLANNED_POMODORI
+         estimate ITEM# will take PLANNED_POMODORI to complete
+
 
 ## Example:
 
