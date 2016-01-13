@@ -6,7 +6,10 @@ require 'terminal-notifier'
 require_relative 'lib/task'
 require_relative 'lib/countdown'
 require_relative 'lib/pomo_logger'
+require_relative 'lib/os'
 require_relative 'lib/terminal_notifier_logger'
+require_relative 'lib/linux_notifier_logger'
+require_relative 'lib/notifier_factory'
 require_relative 'lib/file_logger'
 
 POMODORO_SECONDS = 25 * 60
@@ -41,7 +44,7 @@ def plan_task todos, index, planned
 end
 
 def puts_and_exit string
-  puts string 
+  puts string
   exit
 end
 
