@@ -2,12 +2,14 @@
 
 require 'date'
 require 'rainbow'
-require 'terminal-notifier'
+require_relative 'lib/os'
+if OS.mac?
+  require 'terminal-notifier'
+  require_relative 'lib/terminal_notifier_logger'
+end
 require_relative 'lib/task'
 require_relative 'lib/countdown'
 require_relative 'lib/pomo_logger'
-require_relative 'lib/os'
-require_relative 'lib/terminal_notifier_logger'
 require_relative 'lib/linux_notifier_logger'
 require_relative 'lib/notifier_factory'
 require_relative 'lib/file_logger'
