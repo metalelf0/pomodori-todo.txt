@@ -21,7 +21,7 @@ end
 
 def read_todos
   todos = File.read(ENV['TODO_FILE'])
-  todos.split($/)
+  todos.split(/\r?\n/)
 end
 
 def increase_pomos todos, index
@@ -41,7 +41,7 @@ def plan_task todos, index, planned
 end
 
 def puts_and_exit string
-  puts string 
+  puts string
   exit
 end
 
