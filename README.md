@@ -18,7 +18,7 @@ A pomodoro counter implementation for [Todo.txt](http://todotxt.com/).
 
 ## Usage:
 
-	todo.sh pomo action [task_number] [args]
+	todo.sh pom action [task_number] [args]
 	Actions:
 	  ls
 	     lists tasks with pomodori count and estimates
