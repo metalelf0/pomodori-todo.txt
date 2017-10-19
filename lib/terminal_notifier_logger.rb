@@ -1,9 +1,9 @@
 class TerminalNotifierLogger
   def notify_start task
-    TerminalNotifier.notify('Pomodoro started', title: 'Pomotxt', sound: 'Glass')
+    TerminalNotifier.notify("#{task.index} #{task.text}", title: 'Pomodoro Started', sound: 'Glass')
   end
 
   def notify_completed task
-    TerminalNotifier.notify('Pomodoro completed!', title: 'Pomotxt', sound: 'Glass')
+    TerminalNotifier.notify("#{task.index} #{task.text}", title: 'Pomodoro Completed!', sound: 'Glass')
   end
 end
