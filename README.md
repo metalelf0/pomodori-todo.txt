@@ -34,3 +34,9 @@ A pomodoro counter implementation for [Todo.txt](http://todotxt.com/).
 ## Example:
 
 <img src="https://raw.github.com/metalelf0/pomodori-todo.txt/master/screenshot.png">
+
+## tmux integration:
+
+Add `set -g status-right "#(cat ~/.pomo.txt.tmux)"` to your `.tmux.conf`. This
+will put the time remaining in the current pomodoro in the right side of your
+status bar. See `man tmux` for further details on customizing this status.
