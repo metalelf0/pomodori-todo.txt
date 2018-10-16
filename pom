@@ -14,7 +14,25 @@ require_relative 'lib/linux_notifier_logger'
 require_relative 'lib/notifier_factory'
 require_relative 'lib/file_logger'
 
-POMODORO_SECONDS = 25 * 60
+#
+# ENVIRONMENT VARIABLES
+# 
+# The following variables can be set:
+#
+# POMODORO_SECONDS sets the duration for one pomodoro
+#
+# POMODORO_SIG_PROCESS a process to be signalled every second to update
+# POMODORO_SIG_SIGNAL the signal to be sent
+# This can be used for some custom notification, e.g. for i3blocks.
+# See: https://github.com/vivien/i3blocks
+#
+
+if ENV.has_key?('POMODORO_SECONDS')
+  POMODORO_SECONDS = ENV['POMODORO_SECONDS'].to_i
+else
+  POMODORO_SECONDS = 25 * 60
+end
+
 # TODO: either move this to a env variable or a yml configuration file
 POMODORO_LOG_FILE = "#{ENV['HOME']}/Documents/pomodoro_log.txt"
 
@@ -50,8 +68,12 @@ def puts_and_exit string
   exit
 end
 
+action = ARGV[1] || 'ls'
+if ENV.has_key?('POMODORO_SIG_SIGNAL') && ENV.has_key?('POMODORO_SIG_PROCESS')
+  system("pkill -RTMIN+#{ENV['POMODORO_SIG_SIGNAL']} #{ENV['POMODORO_SIG_PROCESS']}")
+end
 
-case ARGV[1]
+case action
 when 'ls'
   todos = read_todos
   todos.each_with_index do |todo, index|
@@ -83,6 +105,9 @@ when 'start'
   Countdown.new.run(POMODORO_SECONDS, services: [ :tmux, :iterm2 ])
   logger.log_pomodoro_completed(task_being_worked)
   increase_pomos todos, index
+  if ENV.has_key?('POMODORO_SIG_SIGNAL') && ENV.has_key?('POMODORO_SIG_PROCESS')
+    system("pkill -RTMIN+#{ENV['POMODORO_SIG_SIGNAL']} #{ENV['POMODORO_SIG_PROCESS']}")
+  end
 when 'help'
   puts "Usage: todo.sh pomo action [task_number] [args]\n"
   puts "Actions:"
