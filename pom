@@ -44,7 +44,7 @@ end
 
 def read_todos
   todos = File.read(ENV['TODO_FILE'])
-  todos.split($/)
+  todos.split(/\r?\n/)
 end
 
 def increase_pomos todos, index
@@ -102,6 +102,7 @@ when 'start'
   todos = read_todos
   task_being_worked = Task.new(index + 1, todos[index])
   logger.log_pomodoro_started(task_being_worked)
+  task_being_worked.puts_highlighted
   Countdown.new.run(POMODORO_SECONDS, services: [ :tmux, :iterm2 ])
   logger.log_pomodoro_completed(task_being_worked)
   increase_pomos todos, index
