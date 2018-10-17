@@ -26,6 +26,9 @@ class Countdown
 
   def clear_tmux()
     `echo "break" > ~/.pomo.txt.tmux`
+    if ENV.has_key?('POMODORO_SIG_SIGNAL') && ENV.has_key?('POMODORO_SIG_PROCESS')
+      system("pkill -RTMIN+" + ENV['POMODORO_SIG_SIGNAL'] + " " + ENV['POMODORO_SIG_PROCESS'])
+    end
   end
 
   def set_window_title(current_seconds, seconds)
