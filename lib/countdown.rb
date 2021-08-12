@@ -33,7 +33,7 @@ class Countdown
 
 
   def dots_for mins
-    "#{'.' * (25 - mins)}#{' ' * mins}"
+    "#{'.' * (50 - mins)}#{' ' * mins}"
   end
 
 end
