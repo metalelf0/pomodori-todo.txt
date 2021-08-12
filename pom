@@ -53,7 +53,7 @@ when 'ls'
     Task.new(index + 1, todo).puts_highlighted
   end
 when 'log'
-  puts `cat #{POMODORO_LOG_FILE}`
+  puts `cat "#{POMODORO_LOG_FILE}"`
 when 'add'
   puts_and_exit "You must insert the task number" unless index = ARGV[2]
   puts_and_exit "Task number must be... a number" unless index =~ /\d+/
