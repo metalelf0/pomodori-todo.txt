@@ -2,11 +2,11 @@
 
 require 'date'
 require 'rainbow'
-require 'terminal-notifier'
+# require 'terminal-notifier'
 require_relative 'lib/task'
 require_relative 'lib/countdown'
 require_relative 'lib/pomo_logger'
-require_relative 'lib/terminal_notifier_logger'
+# require_relative 'lib/terminal_notifier_logger'
 require_relative 'lib/file_logger'
 
 POMODORO_SECONDS = 25 * 60
