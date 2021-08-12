@@ -75,6 +75,7 @@ when 'start'
   todos = read_todos
   task_being_worked = Task.new(index + 1, todos[index])
   logger.log_pomodoro_started(task_being_worked)
+  puts task_being_worked
   Countdown.new.run(POMODORO_SECONDS, services: [ :tmux, :iterm2 ])
   logger.log_pomodoro_completed(task_being_worked)
   increase_pomos todos, index
