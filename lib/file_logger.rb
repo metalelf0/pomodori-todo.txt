@@ -11,11 +11,11 @@ class FileLogger
 
   def notify_start task
     add_separator_if_new_day
-    File.open(pomodoro_log_file, "a") { |file| file.puts "#{Time.now.strftime('%Y-%m-%d %H:%M')} Pomodoro nr. #{sprintf("% 2d", task.pomodori + 1)} started:   #{task.text}" }
+    File.open(pomodoro_log_file, "a") { |file| file.puts "#{Time.now.strftime('%Y-%m-%d %H:%M')}\tstart\t#{sprintf("% 2d", task.pomodori + 1)}\t#{task.text}" }
   end
 
   def notify_completed task
-    File.open(pomodoro_log_file, "a") { |file| file.puts "#{Time.now.strftime('%Y-%m-%d %H:%M')} Pomodoro nr. #{sprintf("% 2d", task.pomodori + 1)} completed: #{task.text}" }
+    File.open(pomodoro_log_file, "a") { |file| file.puts "#{Time.now.strftime('%Y-%m-%d %H:%M')}\tstop\t#{sprintf("% 2d", task.pomodori + 1)}\t#{task.text}" }
   end
 
   private
