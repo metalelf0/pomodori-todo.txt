@@ -11,7 +11,7 @@ require_relative 'lib/file_logger'
 
 POMODORO_SECONDS = 50 * 60
 # TODO: either move this to a env variable or a yml configuration file
-POMODORO_LOG_FILE = "#{ENV['TODO_DIR']}/pomodoro_log.txt"
+POMODORO_LOG_FILE = "#{ENV['TODO_DIR']}/pomodoro_#{Time.now.strftime('%Y-%m')}.csv" # monthly log
 
 def logger
   PomoLogger.new(
